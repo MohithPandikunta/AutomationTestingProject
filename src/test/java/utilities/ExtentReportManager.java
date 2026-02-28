@@ -76,7 +76,7 @@ public class ExtentReportManager implements ITestListener {
 		
 	}
 
-	public void onTestFailure(ITestResult result) {
+	 public void onTestFailure(ITestResult result) {
 		test = extent.createTest(result.getTestClass().getName());
 		test.assignCategory(result.getMethod().getGroups());
 		
@@ -91,6 +91,7 @@ public class ExtentReportManager implements ITestListener {
 			e1.printStackTrace();
 		}
 	}
+
 
 	public void onTestSkipped(ITestResult result) {
 		test = extent.createTest(result.getTestClass().getName());

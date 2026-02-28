@@ -8,20 +8,13 @@
     <parameter name="os" value="Mac"/>
     <parameter name="browser" value="chrome"/>
     <classes>
-      <class name="testCases.TC002_LoginTest">
+      <class name="testCases.TC006_EndToEndTest">
         <methods>
           <include name="tearDown"/>
-          <include name="verify_login"/>
+          <include name="endToendTest"/>
           <include name="setup"/>
         </methods>
-      </class> <!-- testCases.TC002_LoginTest -->
-      <class name="testCases.TC001_AccountRegistrationTest">
-        <methods>
-          <include name="verify_account_registration"/>
-          <include name="tearDown"/>
-          <include name="setup"/>
-        </methods>
-      </class> <!-- testCases.TC001_AccountRegistrationTest -->
+      </class> <!-- testCases.TC006_EndToEndTest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
