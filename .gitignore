@@ -1,0 +1,6 @@
+target/
+test-output/
+reports/
+screenshots/
+*.log
+*.class
