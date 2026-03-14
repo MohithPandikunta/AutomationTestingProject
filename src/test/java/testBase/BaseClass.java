@@ -18,6 +18,7 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -31,12 +32,35 @@ public class BaseClass {
 	public WebDriver driver;
 	public Logger logger;
 	public Properties p;
+	
+	 public ChromeOptions getChromeOptions() {
+
+	    ChromeOptions options = new ChromeOptions();
+
+	    // open clean browser session
+	    options.addArguments("--incognito");
+
+	    // disable notifications
+	    options.addArguments("--disable-notifications");
+
+	    // disable password manager
+	    HashMap<String, Object> prefs = new HashMap<>();
+	    prefs.put("credentials_enable_service", false);
+	    prefs.put("profile.password_manager_enabled", false);
+
+	    options.setExperimentalOption("prefs", prefs);
+
+	    return options;
+	}
+	
+	
 
 	@BeforeClass(groups = { "Sanity", "Regression", "Master" })
 	@Parameters({ "os", "browser" })
 	public void setup(String os, String br) throws IOException {
 		// 1. Loading config.properties
 		FileReader file = new FileReader("./src/test/resources/config.properties");
+		
 		p = new Properties();
 		p.load(file);
 		logger = LogManager.getLogger(this.getClass());
@@ -54,7 +78,10 @@ public class BaseClass {
 			}
 
 			switch (br.toLowerCase()) {
-			case "chrome": capabilities.setBrowserName("chrome"); break;
+			case "chrome": ChromeOptions options = getChromeOptions();
+		    capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+
+		    capabilities.setBrowserName("chrome"); break;
 			case "firefox": capabilities.setBrowserName("firefox"); break;
 			case "edge": capabilities.setBrowserName("MicrosoftEdge"); break;
 			default: System.out.println("No matching browser"); return;
@@ -85,12 +112,15 @@ public class BaseClass {
 			
 			 bstackOptions.put("networkLogs", true);
 			    bstackOptions.put("consoleLogs", "info");
+			    
+			    // get ChromeOptions from your method
+			    ChromeOptions options = getChromeOptions();
 			
-			capabilities.setCapability("bstack:options", bstackOptions);
-			capabilities.setBrowserName(br);
+			    options.setCapability("browserName", br);
+			    options.setCapability("bstack:options", bstackOptions);
 			
 
-			driver = new RemoteWebDriver(new URL("https://hub-cloud.browserstack.com/wd/hub"), capabilities);
+			driver = new RemoteWebDriver(new URL("https://hub-cloud.browserstack.com/wd/hub"), options);
 		}
 		
 		
@@ -98,12 +128,12 @@ public class BaseClass {
 		// 4. LOCAL EXECUTION
 		else if (executionEnv.equals("local")) {
 			switch (br.toLowerCase()) {
-			case "chrome": driver = new ChromeDriver(); break;
+			case "chrome": driver = new ChromeDriver(getChromeOptions());
+			    break;
 			case "firefox": driver = new FirefoxDriver(); break;
 			case "edge": driver = new EdgeDriver(); break;
 			}
 		}
-		
 		
 
 		// 5. COMMON SETUP
@@ -132,6 +162,7 @@ public class BaseClass {
 		TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
 		File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
 		String destination = System.getProperty("user.dir") + "/screenshots/" + tname + "_" + timeStamp + ".png";
+		
 
 		try {
 			FileUtils.copyFile(source, new File(destination));
