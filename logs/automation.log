@@ -2947,3 +2947,7 @@ Host info: host: 'Mohiths-MacBook-Air.local', ip: '192.168.1.110'
 2026-03-14 12:26:49 [main] INFO  org.testng.internal.Utils - [TestNG] Running:
   /Users/mohithpandikunta/eclipse-workspace/AutomationTestingProject/testng.xml
 
+2026-03-14 13:13:33 [main] DEBUG org.testng.TestNG - suiteXmlPath: "/Users/mohithpandikunta/eclipse-workspace/AutomationTestingProject/testng.xml"
+2026-03-14 13:13:33 [main] INFO  org.testng.internal.Utils - [TestNG] Running:
+  /Users/mohithpandikunta/eclipse-workspace/AutomationTestingProject/testng.xml
+
