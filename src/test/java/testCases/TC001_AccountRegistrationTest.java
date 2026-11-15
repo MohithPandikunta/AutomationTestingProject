@@ -26,7 +26,7 @@ public class TC001_AccountRegistrationTest extends BaseClass {
 		
 		try 
 		{
-		HomePage hp=new HomePage(driver);
+		HomePage hp=new HomePage(driver); // Round 2: Practice running my QA branch in Jenkins.
 		hp.lnkMyAccount();
 		logger.info("Clicked on MY Account");
 		hp.lnkRegister();
