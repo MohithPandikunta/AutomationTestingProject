@@ -8,7 +8,7 @@ public class AccountRegistrationPage extends BasePage {
 
 	public AccountRegistrationPage(WebDriver driver) {
 		
-		super(driver);
+		super(driver); // Hi GitHub, I added this comment for Git practice.
 		
 	}
 	
