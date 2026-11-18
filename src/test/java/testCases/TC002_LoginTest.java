@@ -33,7 +33,7 @@ public class TC002_LoginTest extends BaseClass
 		logger.info("clicked on ligin button..");
 		
 		//My Account Page
-		MyAccountPage macc=new MyAccountPage(driver);
+		MyAccountPage macc=new MyAccountPage(driver); // Updated Login button color.
 				
 		boolean targetPage=macc.isMyAccountPageExists();
 		
