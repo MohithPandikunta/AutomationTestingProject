@@ -36,7 +36,7 @@ public class LoginPage extends BasePage{
 		btnLogin.click();
 	}
 	
-	
+	// Updated Login button color.
 
 
 
