@@ -51,7 +51,7 @@ public class SearchPage extends BasePage
 				}
 			}
 		
-		}
+		} // Updated search page product..
 		
 		public void setQuantity(String qty)
 		{
